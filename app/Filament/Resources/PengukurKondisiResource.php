@@ -39,7 +39,11 @@ class PengukurKondisiResource extends Resource
                 ->columns(1),
                 Card::make()
                 ->schema([
-                    TextInput::make('kondisi_ruang')->required(),
+                    Select::make('kondisi_ruang')
+                        ->options([
+                            'Suhu (⁰C)' => 'Suhu (⁰C)',
+                            'Kelembaban (%RH)' => 'Kelembaban (%RH)',
+                        ])->required(),
                     TextInput::make('awal')->required(),
                     TextInput::make('akhir')->required(),
                     TextInput::make('toleransi')->required(),

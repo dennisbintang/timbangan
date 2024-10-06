@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Columns\Column;
+use App\Models\DaftarAlat;
 
 
 class AdministrasiResource extends Resource
@@ -53,6 +54,12 @@ class AdministrasiResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('no_order'),
+                TextColumn::make('nama_alat')->searchable(),
+                TextColumn::make('merek')->searchable(),
+                // TextColumn::make('model_type')->searchable(),
+                // TextColumn::make('no_seri')->searchable(),
+                // TextColumn::make('resolusi')->searchable(),
+                // TextColumn::make('rentang_ukur')->searchable(),
                 TextColumn::make('nama_instansi')->searchable(),
                 TextColumn::make('ruang_kalibrasi'),
                 TextColumn::make('tanggal_kalibrasi')->sortable(),
@@ -61,8 +68,22 @@ class AdministrasiResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('Download Report')
+                ->url(fn (Administrasi $record): string => route('administrasi.export', $record))
+                ->openUrlInNewTab()
+                ->icon('heroicon-o-arrow-down-tray'),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->headerActions([
+                // ExportAction::make()->exports([
+                //     ExcelExport::make('daftar_alats')->fromTable()
+                //     //ExcelExport::make()->fromTable(),
+                //     // ExcelExport::make()
+                //     // ->withColumns([
+                //     //     Column::make('LAPORAN PENGUJIAN DAN/ATAU KALIBRASI TIMBANGAN BAYI'),
+                //     // ])
+                // ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,8 +108,5 @@ class AdministrasiResource extends Resource
         ];
     }
 
-    public function saveAndClose(): void
-    {
-        // ...
-    }
+    
 }

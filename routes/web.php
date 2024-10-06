@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('administrasi/export/{id}', [\App\Http\Controllers\ResultController::class, 'export'])
+->name('administrasi.export');

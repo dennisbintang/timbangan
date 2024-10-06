@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "eightynine/filament-reports": "^3.0",
         "filament/filament": "^3.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "pxlrbt/filament-excel": "2.1"
     },
     "require-dev": {
